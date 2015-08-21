@@ -7,16 +7,31 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FloatingView" customModule="FloatingView" customModuleProvider="target">
             <connections>
                 <outlet property="mainView" destination="iN0-l3-epB" id="ud5-Q3-cLe"/>
+                <outlet property="messageLabel" destination="4ed-pF-xoK" id="LvT-0H-xyJ"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+        <view autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="104" height="55"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ed-pF-xoK">
+                    <rect key="frame" x="0.0" y="0.0" width="104" height="55"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="4ed-pF-xoK" secondAttribute="trailing" id="EME-Wy-shM"/>
+                <constraint firstItem="4ed-pF-xoK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Es8-Ze-FZJ"/>
+                <constraint firstAttribute="bottom" secondItem="4ed-pF-xoK" secondAttribute="bottom" id="LtH-Yg-PyB"/>
+                <constraint firstItem="4ed-pF-xoK" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="zhQ-bn-Mi5"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-4.5" y="442.5"/>
+            <point key="canvasLocation" x="-53" y="369.5"/>
         </view>
     </objects>
 </document>
