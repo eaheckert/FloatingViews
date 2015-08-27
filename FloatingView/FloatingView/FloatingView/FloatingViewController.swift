@@ -16,15 +16,30 @@ class FloatingViewController: UIViewController
     {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    override func didReceiveMemoryWarning()
+    {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func createFloatingViews(messages: Array<String>, color: UIColor?)
+    {
+        if color != nil
+        {
+            self.view.backgroundColor = color
+        }
+        else
+        {
+            self.view.backgroundColor = UIColor(white: 0.0, alpha: 0.5)
+        }
         
-        self.view.backgroundColor = UIColor(white: 0.0, alpha: 0.5)
-        
-        var messageAr: Array = ["Go for a run", "take a walk", "make dinner", "hang out with friends"]
         
         var xPos: CGFloat = 0.0
         var yPos: CGFloat = 20.0
         
-        for message in messageAr
+        for message in messages
         {
             var messageView: FloatingView = FloatingView()
             
@@ -38,12 +53,7 @@ class FloatingViewController: UIViewController
             
             view.addSubview(messageView)
         }
-    }
-    
-    override func didReceiveMemoryWarning()
-    {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
     }
     
 }
