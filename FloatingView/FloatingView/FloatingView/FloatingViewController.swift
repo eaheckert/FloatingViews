@@ -11,11 +11,17 @@ import UIKit
 
 class FloatingViewController: UIViewController
 {
+    private var floatingAnimator: UIDynamicAnimator!
+    private var gravity: UIGravityBehavior!
+    private var viewCollision: UICollisionBehavior!
+    private var floatingViews = NSMutableArray()
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+//        floatingAnimator = UIDynamicAnimator(referenceView: view)
     }
     
     override func didReceiveMemoryWarning()
@@ -26,6 +32,8 @@ class FloatingViewController: UIViewController
     
     func createFloatingViews(messages: Array<String>, color: UIColor?)
     {
+        floatingAnimator = UIDynamicAnimator(referenceView: view)
+        
         if color != nil
         {
             self.view.backgroundColor = color
@@ -37,7 +45,7 @@ class FloatingViewController: UIViewController
         
         
         var xPos: CGFloat = 0.0
-        var yPos: CGFloat = 20.0
+        var yPos: CGFloat = -200.0
         
         for message in messages
         {
@@ -52,7 +60,28 @@ class FloatingViewController: UIViewController
             yPos += messageView.frame.height
             
             view.addSubview(messageView)
+            
+            floatingViews.addObject(messageView)
+            
+            var dynamicBehavior = UIDynamicItemBehavior(items: [messageView])
+            dynamicBehavior.elasticity = CGFloat(Float(arc4random()) / Float(UINT32_MAX)/4)
+            dynamicBehavior.allowsRotation = false
+            floatingAnimator.addBehavior(dynamicBehavior)
+            
+//            var pushBehavior = UIPushBehavior(items: [messageView], mode: UIPushBehaviorMode.Continuous)
+//            pushBehavior.magnitude = 1.0
+//            floatingAnimator.addBehavior(pushBehavior)
         }
+        
+        let viewItems = floatingViews as [AnyObject]
+        
+        gravity = UIGravityBehavior(items: viewItems)
+        
+        viewCollision = UICollisionBehavior(items: viewItems)
+        viewCollision.addBoundaryWithIdentifier("Ground", fromPoint: CGPointMake(view.frame.origin.x, view.frame.size.height), toPoint: CGPointMake(view.frame.origin.x+view.frame.size.width, view.frame.size.height))
+        
+        floatingAnimator.addBehavior(gravity)
+        floatingAnimator.addBehavior(viewCollision)
         
     }
     

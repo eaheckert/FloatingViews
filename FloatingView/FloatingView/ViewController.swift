@@ -27,11 +27,11 @@ class ViewController: UIViewController
     {
         var vc: FloatingViewController = FloatingViewController()
         
-        vc.createFloatingViews(["Goto Gym","Cook Dinner"], color:.whiteColor)
-        
         self.addChildViewController(vc)
         
         self.view.addSubview(vc.view)
+        
+        vc.createFloatingViews(["Goto Gym","Cook Dinner"], color:nil)
     }
 
 }
