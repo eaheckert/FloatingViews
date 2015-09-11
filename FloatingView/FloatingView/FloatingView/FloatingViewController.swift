@@ -9,12 +9,13 @@
 import Foundation
 import UIKit
 
-class FloatingViewController: UIViewController
+class FloatingViewController: UIViewController, FloatingViewDelegate
 {
     private var floatingAnimator: UIDynamicAnimator!
     private var gravity: UIGravityBehavior!
     private var viewCollision: UICollisionBehavior!
     private var floatingViews = NSMutableArray()
+    private var floatingViewDict = NSMutableDictionary()
     
     override func viewDidLoad()
     {
@@ -53,24 +54,35 @@ class FloatingViewController: UIViewController
             
             messageView.loadMessageLabel(message)
             
-            messageView.frame = CGRect(x: xPos, y: yPos, width: messageView.frame.width, height: messageView.frame.height)
+            messageView.frame = CGRect(x: 0, y: 0, width: messageView.frame.width, height: messageView.frame.height)
             
-            xPos += messageView.frame.width/2
+            let messageHalfWidth = ((messageView.frame.size.width/2) + 10)
             
-            yPos += messageView.frame.height
+            xPos = CGFloat(arc4random()) / CGFloat(UINT32_MAX) * abs(messageHalfWidth - (view.frame.size.width-messageHalfWidth)) + min(messageHalfWidth, (view.frame.size.width-messageHalfWidth))
+            
+            messageView.center = CGPointMake(xPos, yPos)
+            
+            messageView.delegate = self
             
             view.addSubview(messageView)
             
             floatingViews.addObject(messageView)
             
+            var viewArray = NSMutableArray()
+            
+            if floatingViewDict[message] != nil
+            {
+                viewArray = floatingViewDict[message] as! NSMutableArray
+            }
+            
+            viewArray.addObject(messageView)
+            
+            floatingViewDict.setObject(viewArray, forKey: message)
+            
             var dynamicBehavior = UIDynamicItemBehavior(items: [messageView])
             dynamicBehavior.elasticity = CGFloat(Float(arc4random()) / Float(UINT32_MAX)/4)
             dynamicBehavior.allowsRotation = false
             floatingAnimator.addBehavior(dynamicBehavior)
-            
-//            var pushBehavior = UIPushBehavior(items: [messageView], mode: UIPushBehaviorMode.Continuous)
-//            pushBehavior.magnitude = 1.0
-//            floatingAnimator.addBehavior(pushBehavior)
         }
         
         let viewItems = floatingViews as [AnyObject]
@@ -83,6 +95,38 @@ class FloatingViewController: UIViewController
         floatingAnimator.addBehavior(gravity)
         floatingAnimator.addBehavior(viewCollision)
         
+    }
+    
+    func floatViewSelected(messageText: String)
+    {
+        println(messageText)
+        for key in floatingViewDict.allKeys
+        {
+            if !key.isEqualToString(messageText)
+            {
+                let viewArray = floatingViewDict[String(key as! NSString)] as! NSArray
+                
+                for( var i = 0; i < viewArray.count;i++)
+                {
+                    let view = viewArray[i] as! FloatingView
+                    view.alpha = 0.5
+                }
+            }
+        }
+    }
+    
+    func floatViewUnselected()
+    {
+        for key in floatingViewDict.allKeys
+        {
+            let viewArray = floatingViewDict[String(key as! NSString)] as! NSArray
+            
+            for( var i = 0; i < viewArray.count;i++)
+            {
+                let view = viewArray[i] as! FloatingView
+                view.alpha = 1.0
+            }
+        }
     }
     
 }

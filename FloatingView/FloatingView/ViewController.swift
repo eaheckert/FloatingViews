@@ -31,7 +31,7 @@ class ViewController: UIViewController
         
         self.view.addSubview(vc.view)
         
-        vc.createFloatingViews(["Goto Gym","Cook Dinner"], color:nil)
+        vc.createFloatingViews(["Goto Gym","Cook Dinner","Cook Dinner","Cook Dinner","Cook Dinner","Cook Dinner","Cook Dinner","Cook Dinner","Cook Dinner","go to the movies", "do homework"], color:nil)
     }
 
 }

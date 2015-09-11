@@ -9,6 +9,12 @@
 import Foundation
 import UIKit
 
+protocol FloatingViewDelegate
+{
+    func floatViewSelected(messageText:String)
+    func floatViewUnselected()
+}
+
 class FloatingView: UIView
 {
     
@@ -17,6 +23,11 @@ class FloatingView: UIView
     
     @IBOutlet var mainView: UIView!
     @IBOutlet weak var messageLabel: UILabel!
+    
+    
+    //MARK: class Varaibles
+    
+    var delegate: FloatingViewDelegate?
     
     
     //MARK: Required Methods
@@ -58,8 +69,35 @@ class FloatingView: UIView
         }
     }
     
+    
+    //MARK: Custom Methods
+    
     func loadMessageLabel(message: String)
     {
         messageLabel.text = message
+        var longPress = UILongPressGestureRecognizer(target: self, action: "onLongPress:")
+        longPress.minimumPressDuration = 0.5
+        self.addGestureRecognizer(longPress)
+    }
+    
+    
+    //MARK: Gesture Methods
+    
+    func onLongPress(gestureRecongizer:UIGestureRecognizer)
+    {
+        if delegate == nil
+        {
+            return
+        }
+        
+        switch gestureRecongizer.state
+        {
+        case UIGestureRecognizerState.Began:
+            delegate?.floatViewSelected(messageLabel.text!)
+        case UIGestureRecognizerState.Ended:
+            delegate?.floatViewUnselected()
+        default:
+            return
+        }
     }
 }
