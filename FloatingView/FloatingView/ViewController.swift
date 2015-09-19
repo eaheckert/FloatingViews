@@ -25,11 +25,11 @@ class ViewController: UIViewController
 
     @IBAction func onShowFloatingViews(sender: AnyObject)
     {
-        var vc: FloatingViewController = FloatingViewController()
+        let vc = FloatingViewsController()
         
         self.addChildViewController(vc)
         
-        self.view.addSubview(vc.view)
+        view.addSubview(vc.view)
         
         vc.createFloatingViews(["Goto Gym","Cook Dinner","Cook Dinner","Cook Dinner","Cook Dinner","Cook Dinner","Cook Dinner","Cook Dinner","Cook Dinner","go to the movies", "do homework"], color:nil)
     }

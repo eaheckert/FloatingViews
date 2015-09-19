@@ -13,7 +13,7 @@
 		81C3F9711B82DA8700BC1618 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81C3F9701B82DA8700BC1618 /* Images.xcassets */; };
 		81C3F9741B82DA8700BC1618 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81C3F9721B82DA8700BC1618 /* LaunchScreen.xib */; };
 		81C3F9801B82DA8800BC1618 /* FloatingViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C3F97F1B82DA8800BC1618 /* FloatingViewTests.swift */; };
-		81C3F9901B82E74600BC1618 /* FloatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C3F98F1B82E74600BC1618 /* FloatingViewController.swift */; };
+		81C3F9901B82E74600BC1618 /* FloatingViewsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C3F98F1B82E74600BC1618 /* FloatingViewsController.swift */; };
 		81C3F9921B8421D300BC1618 /* FloatingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81C3F9911B8421D300BC1618 /* FloatingView.xib */; };
 		81C3F9941B8421E600BC1618 /* FloatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C3F9931B8421E600BC1618 /* FloatingView.swift */; };
 /* End PBXBuildFile section */
@@ -39,7 +39,7 @@
 		81C3F9791B82DA8800BC1618 /* FloatingViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FloatingViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		81C3F97E1B82DA8800BC1618 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		81C3F97F1B82DA8800BC1618 /* FloatingViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingViewTests.swift; sourceTree = "<group>"; };
-		81C3F98F1B82E74600BC1618 /* FloatingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingViewController.swift; sourceTree = "<group>"; };
+		81C3F98F1B82E74600BC1618 /* FloatingViewsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingViewsController.swift; sourceTree = "<group>"; };
 		81C3F9911B8421D300BC1618 /* FloatingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FloatingView.xib; sourceTree = "<group>"; };
 		81C3F9931B8421E600BC1618 /* FloatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -122,7 +122,7 @@
 		81C3F98E1B82E74600BC1618 /* FloatingView */ = {
 			isa = PBXGroup;
 			children = (
-				81C3F98F1B82E74600BC1618 /* FloatingViewController.swift */,
+				81C3F98F1B82E74600BC1618 /* FloatingViewsController.swift */,
 				81C3F9931B8421E600BC1618 /* FloatingView.swift */,
 				81C3F9911B8421D300BC1618 /* FloatingView.xib */,
 			);
@@ -231,7 +231,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81C3F9941B8421E600BC1618 /* FloatingView.swift in Sources */,
-				81C3F9901B82E74600BC1618 /* FloatingViewController.swift in Sources */,
+				81C3F9901B82E74600BC1618 /* FloatingViewsController.swift in Sources */,
 				81C3F96C1B82DA8700BC1618 /* ViewController.swift in Sources */,
 				81C3F96A1B82DA8700BC1618 /* AppDelegate.swift in Sources */,
 			);
@@ -363,8 +363,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = FloatingView/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -373,8 +375,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = FloatingView/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -431,6 +435,7 @@
 				81C3F9851B82DA8800BC1618 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		81C3F9861B82DA8800BC1618 /* Build configuration list for PBXNativeTarget "FloatingViewTests" */ = {
 			isa = XCConfigurationList;
@@ -439,6 +444,7 @@
 				81C3F9881B82DA8800BC1618 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -19,11 +19,12 @@ class FloatingView: UIView
 {
     
     
-    //MARK: IB Varaibles
+    //MARK: IB Variables
     
     @IBOutlet var mainView: UIView!
     @IBOutlet weak var messageLabel: UILabel!
     
+    var fakeVaraible = NSMutableDictionary()
     
     //MARK: class Varaibles
     
@@ -42,7 +43,7 @@ class FloatingView: UIView
     
     required init(coder aDecoder: NSCoder)
     {
-        super.init(coder: aDecoder)
+        super.init(coder: aDecoder)!
         NSBundle.mainBundle().loadNibNamed("FloatingView", owner: self, options: nil)
         self.addSubview(self.mainView)
         self.frame = self.mainView.frame
@@ -75,7 +76,7 @@ class FloatingView: UIView
     func loadMessageLabel(message: String)
     {
         messageLabel.text = message
-        var longPress = UILongPressGestureRecognizer(target: self, action: "onLongPress:")
+        let longPress = UILongPressGestureRecognizer(target: self, action: "onLongPress:")
         longPress.minimumPressDuration = 0.5
         self.addGestureRecognizer(longPress)
     }

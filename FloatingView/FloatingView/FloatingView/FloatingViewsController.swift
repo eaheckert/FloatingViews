@@ -9,13 +9,18 @@
 import Foundation
 import UIKit
 
-class FloatingViewController: UIViewController, FloatingViewDelegate
+class FloatingViewsController: UIViewController, FloatingViewDelegate
 {
     private var floatingAnimator: UIDynamicAnimator!
     private var gravity: UIGravityBehavior!
     private var viewCollision: UICollisionBehavior!
-    private var floatingViews = NSMutableArray()
+    private var floatingViews: [FloatingView] = []
     private var floatingViewDict = NSMutableDictionary()
+    
+    
+    
+//    @IBOutlet var mainView: UIView!
+//    @IBOutlet weak var messageLabel: UILabel!
     
     override func viewDidLoad()
     {
@@ -33,6 +38,7 @@ class FloatingViewController: UIViewController, FloatingViewDelegate
     
     func createFloatingViews(messages: Array<String>, color: UIColor?)
     {
+        
         floatingAnimator = UIDynamicAnimator(referenceView: view)
         
         if color != nil
@@ -46,11 +52,11 @@ class FloatingViewController: UIViewController, FloatingViewDelegate
         
         
         var xPos: CGFloat = 0.0
-        var yPos: CGFloat = -200.0
+        let yPos: CGFloat = -200.0
         
         for message in messages
         {
-            var messageView: FloatingView = FloatingView()
+            let messageView = FloatingView()
             
             messageView.loadMessageLabel(message)
             
@@ -62,11 +68,11 @@ class FloatingViewController: UIViewController, FloatingViewDelegate
             
             messageView.center = CGPointMake(xPos, yPos)
             
-            messageView.delegate = self
+//            messageView.delegate = self
             
             view.addSubview(messageView)
             
-            floatingViews.addObject(messageView)
+            floatingViews.append(messageView)
             
             var viewArray = NSMutableArray()
             
@@ -79,17 +85,17 @@ class FloatingViewController: UIViewController, FloatingViewDelegate
             
             floatingViewDict.setObject(viewArray, forKey: message)
             
-            var dynamicBehavior = UIDynamicItemBehavior(items: [messageView])
+            let dynamicBehavior = UIDynamicItemBehavior(items: [messageView])
             dynamicBehavior.elasticity = CGFloat(Float(arc4random()) / Float(UINT32_MAX)/4)
             dynamicBehavior.allowsRotation = false
             floatingAnimator.addBehavior(dynamicBehavior)
         }
         
-        let viewItems = floatingViews as [AnyObject]
+//        let viewItems = floatingViews as [AnyObject]
         
-        gravity = UIGravityBehavior(items: viewItems)
+        gravity = UIGravityBehavior(items: floatingViews)
         
-        viewCollision = UICollisionBehavior(items: viewItems)
+        viewCollision = UICollisionBehavior(items: floatingViews)
         viewCollision.addBoundaryWithIdentifier("Ground", fromPoint: CGPointMake(view.frame.origin.x, view.frame.size.height), toPoint: CGPointMake(view.frame.origin.x+view.frame.size.width, view.frame.size.height))
         
         floatingAnimator.addBehavior(gravity)
@@ -99,7 +105,7 @@ class FloatingViewController: UIViewController, FloatingViewDelegate
     
     func floatViewSelected(messageText: String)
     {
-        println(messageText)
+        print(messageText)
         for key in floatingViewDict.allKeys
         {
             if !key.isEqualToString(messageText)
